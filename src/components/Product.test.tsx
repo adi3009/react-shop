@@ -38,4 +38,12 @@ test("display quantity", () => {
     const quantity = screen.queryByDisplayValue("1");
 
     expect(quantity).toBeInTheDocument();
-})
+});
+
+test("display add to cart", () => {
+   render(<Product name={product.name} price={product.price}/>);
+
+   const addToCartButton = screen.queryByText("Add To Cart");
+
+   expect(addToCartButton).toBeInTheDocument();
+});

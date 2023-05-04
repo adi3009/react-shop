@@ -1,12 +1,27 @@
 import {useState} from "react";
 
-export function Quantity() {
+type Props = {
+    onChange: (quantity: number) => any
+}
+
+export function Quantity({onChange}: Props) {
 
     const [value, setValue] = useState(1);
 
-    const increase = () => setValue(value + 1);
+    const increase = () => {
+        const newQty = value + 1;
+        setValue(newQty);
+        onChange(newQty);
+    }
 
-    const decrease = () => value > 1 && setValue(value - 1);
+    const decrease = () => {
+        if (value === 1) {
+            return;
+        }
+        const newQty = value - 1;
+        setValue(newQty);
+        onChange(newQty);
+    }
 
     return (<>
         <button type="button" onClick={decrease}>-</button>
