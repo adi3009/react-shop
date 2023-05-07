@@ -1,6 +1,5 @@
-export interface CartItemInterface {
-    name: string;
-    sku: string;
+import {ProductInterface} from "./ProductInterface";
+
+export interface CartItemInterface extends ProductInterface {
     quantity: number;
-    price: number;
 }

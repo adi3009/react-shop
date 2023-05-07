@@ -1,19 +1,30 @@
-import {useState} from "react";
+import {ProductInterface} from "types";
+import {addProduct, useCart, useCartDispatch} from "reducers/cartReducer";
 
 type Props = {
+    product: ProductInterface,
     quantity: number
 }
 
-export function AddToCartButton({quantity}: Props) {
+export function AddToCartButton({product, quantity}: Props) {
 
-    const [inCart, setInCart] = useState(0);
+    const cartState = useCart();
 
-    const handleClick = () => setInCart(prev => prev + quantity);
+    const cartDispatch = useCartDispatch();
+
+    const itemInCart = cartState?.items.find(item => item.sku === product.sku);
+
+    const inCart = itemInCart ? itemInCart.quantity : 0;
+
+    const handleClick = () => {
+        const item = {...product, quantity};
+        cartDispatch?.(addProduct(item));
+    };
 
     return (
         <>
             <button onClick={handleClick}>Add To Cart</button>
-            <p>{inCart} in Cart</p>
+            {itemInCart && <p>{inCart} in Cart</p>}
         </>
     );
 }

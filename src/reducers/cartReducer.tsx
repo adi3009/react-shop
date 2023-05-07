@@ -29,7 +29,6 @@ const initialState: CartState = {
 export function cartReducer(draft: CartState, action: Action): void {
     switch (action.type) {
         case "ADD_PRODUCT": {
-            console.log("adding product " + action.data);
             const item = draft.items.find((i) => i.sku === action.data.sku);
             if (item) {
                 item.quantity = item.quantity + action.data.quantity;
