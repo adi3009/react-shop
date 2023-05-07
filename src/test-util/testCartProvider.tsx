@@ -1,21 +1,25 @@
 import React, {ReactElement} from "react";
 import {useImmerReducer} from "use-immer";
-import {CartContext, CartDispatchContext, cartReducer} from "./cartReducer";
+import {CartContext, CartDispatchContext, cartReducer} from "reducers/cartReducer";
 import {render, RenderOptions} from "@testing-library/react";
-import {CartState} from "../types/CartState";
+import {CartItemInterface, CartState} from "types";
 import {faker} from "@faker-js/faker";
 
 export const testState: CartState = {
     items: []
 }
 
-export const addProductToTestCartState = () => {
-    testState.items.push({
+export const getTestProduct = (): CartItemInterface => {
+    return {
         name: faker.lorem.words(3),
         sku: faker.lorem.words(1),
         quantity: 5,
         price: parseFloat(faker.commerce.price(10, 100))
-    });
+    }
+}
+
+export const addProductToTestCartState = () => {
+    testState.items.push(getTestProduct());
 }
 
 export const emptyTestCartState = () => {

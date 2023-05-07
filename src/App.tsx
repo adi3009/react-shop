@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
-import {Product} from "./components/Product";
-import {CartProvider} from "./reducers/cartReducer";
-import {Sidebar} from "./components/cart/Sidebar";
+import {Product} from "components";
+import {CartProvider} from "reducers";
+import {CartSidebar} from "components";
 
 function App() {
     return (
         <div className="App">
             <CartProvider>
-                <Sidebar/>
+                <CartSidebar/>
                 <Product name="Product 1" price={100}/>
-            </CartProvider>Ï
+            </CartProvider>
         </div>
     );
 }

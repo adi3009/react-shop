@@ -1,4 +1,4 @@
-import {deleteProduct, emptyCart, useCart, useCartDispatch} from "../../reducers/cartReducer";
+import {deleteProduct, emptyCart, useCart, useCartDispatch} from "reducers/cartReducer";
 import {calculateCartTotal} from "./totalCalculator";
 
 export function Sidebar() {

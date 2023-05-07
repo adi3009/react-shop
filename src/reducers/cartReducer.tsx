@@ -1,4 +1,4 @@
-import type {CartItemInterface} from "../types/CartItemInterface";
+import type {CartItemInterface} from "types";
 import {useImmerReducer} from "use-immer";
 import React, {createContext, useContext} from "react";
 
