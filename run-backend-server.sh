@@ -1,0 +1,1 @@
+npx json-graphql-server ./data/db.js --p 4000

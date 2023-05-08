@@ -6,7 +6,7 @@ import {
     emptyTestCartState,
     renderWithProvider,
     testState
-} from "test-util/testCartProvider";
+} from "test-util/testProvider";
 import {calculateCartTotal} from "./totalCalculator";
 
 beforeEach(() => {

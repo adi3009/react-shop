@@ -2,7 +2,7 @@ import React from "react";
 import {render, screen} from "@testing-library/react";
 import "@testing-library/jest-dom";
 import {Product} from "./Product";
-import {getTestProduct} from "../test-util/testCartProvider";
+import {getTestProduct} from "../test-util/testProvider";
 import {ProductInterface} from "../types";
 
 let product: ProductInterface;
@@ -14,7 +14,7 @@ beforeEach(() => {
 test("display a product", () => {
     render(<Product product={product} />);
 
-    const name = screen.getByRole("heading", {level: 1});
+    const name = screen.getByRole("heading", {level: 2});
     expect(name).toHaveTextContent(product.name);
 
     const sku = screen.getByRole("heading", {level: 4});

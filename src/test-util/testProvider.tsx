@@ -4,6 +4,8 @@ import {CartContext, CartDispatchContext, cartReducer} from "reducers/cartReduce
 import {render, RenderOptions} from "@testing-library/react";
 import {CartItemInterface, CartState, ProductInterface} from "types";
 import {faker} from "@faker-js/faker";
+import {MockedProvider} from "@apollo/client/testing";
+import {GET_PRODUCTS_QUERY} from "../components/ProductList";
 
 export const testState: CartState = {
     items: []
@@ -37,26 +39,51 @@ export const emptyTestCartState = () => {
     }
 }
 
+export const mocks = [
+    {
+        request: {
+            query: GET_PRODUCTS_QUERY
+        },
+        result: {
+            data: {
+                allProducts: [
+                    {
+                        "name": "Nantucket Apple Juice",
+                        "sku": "01GZW2YXVK05N2HCF9BKQACS6E",
+                        "price": 54.05
+                    },
+                    {
+                        "name": "Tart Shells - Sweet, 2",
+                        "sku": "01GZW2YXVK0TM9FAZ46RVJGTB2",
+                        "price": 112.1
+                    }]
+            }
+        }
+    }
+];
+
 /**
  * @see - https://testing-library.com/docs/react-testing-library/setup/#custom-render
  * @see - https://redux.js.org/usage/writing-tests
  */
-export function TestCartProvider({children}: { children: React.ReactNode }) {
+export function TestProvider({children}: { children: React.ReactNode }) {
     const [cartState, dispatch] = useImmerReducer(cartReducer, testState);
 
     return (
-        <CartContext.Provider value={cartState}>
-            <CartDispatchContext.Provider value={dispatch}>
-                {children}
-            </CartDispatchContext.Provider>
-        </CartContext.Provider>
+        <MockedProvider mocks={mocks} addTypename={false}>
+            <CartContext.Provider value={cartState}>
+                <CartDispatchContext.Provider value={dispatch}>
+                    {children}
+                </CartDispatchContext.Provider>
+            </CartContext.Provider>
+        </MockedProvider>
     );
 }
 
 export const renderWithProvider = (ui: ReactElement, options?: Omit<RenderOptions, "wrapper">) => render(
     ui,
     {
-        wrapper: TestCartProvider,
+        wrapper: TestProvider,
         ...options
     }
 );

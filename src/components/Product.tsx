@@ -15,8 +15,8 @@ export function Product({product}: Props) {
 
     return (
         <>
-            <h1>{name}</h1>
-            <h4>{sku}</h4>
+            <h2 data-testid="product-name">{name}</h2>
+            <h4 data-testid="product-sku">{sku}</h4>
             <div data-testid="product-price">£{price}</div>
             <Quantity onChange={handleQuantityChange}/>
             <AddToCartButton product={product} quantity={quantity}/>

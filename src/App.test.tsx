@@ -1,15 +1,16 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
+import {screen} from '@testing-library/react';
 import App from './App';
+import {renderWithProvider} from "test-util/testProvider";
 
-test('renders product component', () => {
-    render(<App/>);
-    const productName = screen.getByRole("heading", {level: 1});
-    expect(productName).toBeInTheDocument();
+test('renders product list component', async () => {
+    renderWithProvider(<App/>);
+    const products = await screen.findAllByTestId("product-container");
+    expect(products.length).toBe(2);
 });
 
 test('renders cart sidebar component', () => {
-    render(<App/>);
+    renderWithProvider(<App/>);
     const cartHeader = screen.getByText("Cart");
     expect(cartHeader).toBeInTheDocument();
 });

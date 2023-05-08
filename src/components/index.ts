@@ -1,4 +1,5 @@
 import {Product} from "./Product";
+import {ProductList} from "./ProductList";
 import {Sidebar} from "./cart/Sidebar";
 
-export {Product, Sidebar as CartSidebar};
+export {Product, ProductList, Sidebar as CartSidebar};
